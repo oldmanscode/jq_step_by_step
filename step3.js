@@ -19,6 +19,10 @@
 	
 	"use strict";
 
+	var arr = [];
+
+	var indexOf = arr.indexOf;
+
 	var getProto = Object.getPrototypeOf;
 
 	var class2type = {};
@@ -144,6 +148,10 @@
 			}
 	
 			return obj;
+		},
+
+		inArray: function(elem, arr, i) {
+			return arr == null ? -1 : indexOf.call(arr, elem, i);
 		}
 	});
 

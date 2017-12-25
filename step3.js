@@ -19,10 +19,6 @@
 	
 	"use strict";
 
-	var arr = [];
-
-	var indexOf = arr.indexOf;
-
 	var getProto = Object.getPrototypeOf;
 
 	var class2type = {};
@@ -102,6 +98,10 @@
 			return jQuery.type(obj) === "function";
 		},
 
+		isWindow: function(obj) {
+			return obj != null && obj === obj.window;
+		},
+
 		isPlainObject: function(obj) {
 			var proto, Ctor;
 	
@@ -148,16 +148,24 @@
 			}
 	
 			return obj;
-		},
-
-		inArray: function(elem, arr, i) {
-			return arr == null ? -1 : indexOf.call(arr, elem, i);
 		}
 	});
 
 	jQuery.each("Boolean Number String Function Array Date RegExp Object Error Symbol".split(" "), function(i, name) {
 		class2type[ "[object " + name + "]" ] = name.toLowerCase();
 	});
+
+	function isArrayLike(obj) {
+		var length = !!obj && "length" in obj && obj.length,
+			type = jQuery.type(obj);
+	
+		if (type === "function" || jQuery.isWindow(obj)) {
+			return false;
+		}
+	
+		return type === "array" || length === 0 ||
+			typeof length === "number" && length > 0 && (length - 1) in obj;
+	}
 
 	var init = jQuery.fn.init = function() {};
 

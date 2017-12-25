@@ -45,7 +45,7 @@
 		}
 
 		if(deep && window.jQuery === jQuery) {
-		window.jQuery = _jQuery;
+			window.jQuery = _jQuery;
 		}
 
 		return jQuery;

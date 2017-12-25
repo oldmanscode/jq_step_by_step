@@ -22,6 +22,8 @@
 	var jQuery = function() {
 		return new jQuery.fn.init();
 	};
+	
+	jQuery.fn = jQuery.prototype;
 
 	var init = jQuery.fn.init = function() {};
 
